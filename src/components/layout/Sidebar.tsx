@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { 
   LayoutDashboard, 
@@ -10,7 +10,8 @@ import {
   Settings,
   Menu,
   X,
-  ChefHat
+  ChefHat,
+  Upload
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -61,6 +62,48 @@ interface SidebarProps {
 }
 
 export function Sidebar({ isOpen, onToggle }: SidebarProps) {
+  const [logoSrc, setLogoSrc] = useState(() => {
+    const savedLogo = localStorage.getItem('customLogo');
+    return savedLogo || chipaflowLogo;
+  });
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleLogoClick = () => {
+    console.log('Logo clicked, attempting to open file dialog');
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+      console.log('File input clicked');
+    } else {
+      console.error('File input ref is null');
+    }
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('File change event triggered');
+    const file = event.target.files?.[0];
+    if (file) {
+      console.log('File selected:', file.name, file.type);
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const result = e.target?.result as string;
+          console.log('File read successfully');
+          setLogoSrc(result);
+          localStorage.setItem('customLogo', result);
+        };
+        reader.onerror = () => {
+          console.error('Error reading file');
+        };
+        reader.readAsDataURL(file);
+      } else {
+        console.error('Selected file is not an image');
+        alert('Por favor, selecione um arquivo de imagem válido.');
+      }
+    } else {
+      console.log('No file selected');
+    }
+  };
+
   return (
     <>
       {/* Mobile Overlay */}
@@ -82,13 +125,29 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-card-border dark:border-card-border">
           <div className="flex items-center gap-3">
-            <img 
-              src={chipaflowLogo} 
-              alt="ChipaFlow Logo" 
-              className="w-8 h-8 rounded-lg object-cover"
-            />
+            <div className="relative">
+              <img 
+                src={logoSrc} 
+                alt="Chiparia Naviraí Logo" 
+                className="w-12 h-12 rounded-lg object-cover"
+              />
+              <button
+                onClick={handleLogoClick}
+                className="absolute -bottom-1 -right-1 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-1 shadow-lg transition-colors"
+                title="Alterar logo"
+              >
+                <Upload className="w-3 h-3" />
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+            </div>
             <div>
-              <h1 className="font-bold text-lg text-foreground dark:text-foreground">ChipaFlow</h1>
+              <h1 className="font-bold text-lg text-foreground dark:text-foreground">Chiparia Naviraí</h1>
               <p className="text-xs text-foreground-muted dark:text-foreground-muted">Sistema Financeiro</p>
             </div>
           </div>
@@ -129,7 +188,7 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
         {/* Footer */}
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-card-border dark:border-card-border">
           <div className="text-center text-xs text-foreground-muted dark:text-foreground-muted">
-            <p>ChipaFlow v1.0</p>
+            <p>Chiparia Naviraí v1.0</p>
             <p>© 2024 - Sistema Completo</p>
           </div>
         </div>

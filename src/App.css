@@ -1,32 +1,7 @@
-/* Variáveis para tema claro e escuro */
-:root {
-  /* Tema claro (padrão) */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f9f9f9;
-  --text-primary: #213547;
-  --text-secondary: #888;
-  --border-color: #e0e0e0;
-  --card-bg: #ffffff;
-  --shadow: rgba(0, 0, 0, 0.1);
-}
-
-/* Modo escuro - ativa automaticamente baseado na preferência do sistema */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #242424;
-    --bg-secondary: #1a1a1a;
-    --text-primary: rgba(255, 255, 255, 0.87);
-    --text-secondary: #888;
-    --border-color: #404040;
-    --card-bg: #2d2d2d;
-    --shadow: rgba(0, 0, 0, 0.3);
-  }
-}
-
-/* Aplicar as variáveis aos elementos */
+/* Aplicar as variáveis do sistema de tema */
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -35,8 +10,8 @@ body {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
 .logo {
@@ -71,48 +46,48 @@ body {
 
 .card {
   padding: 2em;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
   border-radius: 8px;
-  box-shadow: 0 2px 8px var(--shadow);
+  box-shadow: 0 2px 8px hsl(var(--muted) / 0.1);
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .read-the-docs {
-  color: var(--text-secondary);
+  color: hsl(var(--muted-foreground));
 }
 
 /* Estilos específicos para o dashboard financeiro */
 .dashboard-container {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
   min-height: 100vh;
 }
 
 .sidebar {
-  background-color: var(--bg-secondary);
-  border-right: 1px solid var(--border-color);
+  background-color: hsl(var(--background-secondary));
+  border-right: 1px solid hsl(var(--border));
 }
 
 .metric-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 12px var(--shadow);
+  box-shadow: 0 2px 12px hsl(var(--muted) / 0.1);
   transition: all 0.3s ease;
 }
 
 .metric-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 20px var(--shadow);
+  box-shadow: 0 4px 20px hsl(var(--muted) / 0.2);
 }
 
 /* Se você quiser um botão para alternar tema manualmente */
 .theme-toggle {
-  background-color: var(--card-bg);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
+  background-color: hsl(var(--card));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
   border-radius: 6px;
   padding: 0.5rem 1rem;
   cursor: pointer;
@@ -120,17 +95,17 @@ body {
 }
 
 .theme-toggle:hover {
-  background-color: var(--bg-secondary);
+  background-color: hsl(var(--background-secondary));
 }
 
 /* Para garantir que inputs e selects também sigam o tema */
 input, select, textarea {
-  background-color: var(--card-bg);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
+  background-color: hsl(var(--card));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
 }
 
 input:focus, select:focus, textarea:focus {
-  outline: 2px solid #646cff;
+  outline: 2px solid hsl(var(--ring));
   outline-offset: 2px;
 }
