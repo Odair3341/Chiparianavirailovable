@@ -260,13 +260,25 @@ export default function PDV() {
                   <div className="space-y-2">
                     <p className="text-sm text-primary-foreground">Forma de Pagamento:</p>
                     <div className="grid grid-cols-3 gap-2">
-                      <Button size="sm" variant="secondary">
+                      <Button 
+                        size="sm" 
+                        variant="secondary"
+                        onClick={() => console.log("Dinheiro payment selected")}
+                      >
                         <Banknote className="w-4 h-4" />
                       </Button>
-                      <Button size="sm" variant="secondary">
+                      <Button 
+                        size="sm" 
+                        variant="secondary"
+                        onClick={() => console.log("Cartão payment selected")}
+                      >
                         <CreditCard className="w-4 h-4" />
                       </Button>
-                      <Button size="sm" variant="secondary">
+                      <Button 
+                        size="sm" 
+                        variant="secondary"
+                        onClick={() => console.log("PIX payment selected")}
+                      >
                         <Smartphone className="w-4 h-4" />
                       </Button>
                     </div>

@@ -239,8 +239,22 @@ const ProductsTable = ({ products, categories, searchTerm, setSearchTerm, select
                       </TableCell>
                       <TableCell>
                         <div className="flex gap-2 justify-end">
-                          <Button size="sm" variant="ghost" className="hover:bg-background-secondary dark:hover:bg-background-secondary/50"><Edit className="w-4 h-4" /></Button>
-                          <Button size="sm" variant="ghost" className="text-destructive hover:bg-destructive/10 dark:hover:bg-destructive/20"><Trash2 className="w-4 h-4" /></Button>
+                          <Button 
+                            size="sm" 
+                            variant="ghost" 
+                            className="hover:bg-background-secondary dark:hover:bg-background-secondary/50"
+                            onClick={() => console.log(`Edit product ${product.id}`)}
+                          >
+                            <Edit className="w-4 h-4" />
+                          </Button>
+                          <Button 
+                            size="sm" 
+                            variant="ghost" 
+                            className="text-destructive hover:bg-destructive/10 dark:hover:bg-destructive/20"
+                            onClick={() => console.log(`Delete product ${product.id}`)}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
                         </div>
                       </TableCell>
                     </TableRow>

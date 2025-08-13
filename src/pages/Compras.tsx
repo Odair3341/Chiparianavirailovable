@@ -212,11 +212,11 @@ export default function Compras() {
                 <CardDescription>Histórico e status dos pedidos</CardDescription>
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={() => console.log("Filtrar clicked")}>
                   <Filter className="w-4 h-4 mr-2" />
                   Filtrar
                 </Button>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={() => console.log("Período clicked")}>
                   <Calendar className="w-4 h-4 mr-2" />
                   Período
                 </Button>
@@ -259,14 +259,19 @@ export default function Compras() {
                         <TableCell>{getStatusBadge(order.status)}</TableCell>
                         <TableCell>
                           <div className="flex gap-2">
-                            <Button size="sm" variant="ghost">
+                            <Button size="sm" variant="ghost" onClick={() => console.log(`View order ${order.id}`)}>
                               <Eye className="w-4 h-4" />
                             </Button>
-                            <Button size="sm" variant="ghost">
+                            <Button size="sm" variant="ghost" onClick={() => console.log(`Edit order ${order.id}`)}>
                               <Edit className="w-4 h-4" />
                             </Button>
                             {order.status === 'aprovado' && (
-                              <Button size="sm" variant="ghost" className="text-success">
+                              <Button 
+                                size="sm" 
+                                variant="ghost" 
+                                className="text-success"
+                                onClick={() => console.log(`Mark order ${order.id} as delivered`)}
+                              >
                                 <CheckCircle className="w-4 h-4" />
                               </Button>
                             )}
@@ -309,7 +314,7 @@ export default function Compras() {
                   
                   <div className="flex items-center gap-4">
                     {getStatusBadge(supplier.status)}
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" onClick={() => console.log(`Edit supplier ${supplier.id}`)}>
                       <Edit className="w-4 h-4" />
                     </Button>
                   </div>

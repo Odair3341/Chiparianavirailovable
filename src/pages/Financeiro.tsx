@@ -96,11 +96,18 @@ export default function Financeiro() {
             <p className="text-foreground-muted dark:text-foreground-secondary">Controle completo das finanças da chiparia</p>
           </div>
           <div className="flex gap-3">
-            <Button variant="outline" className="dark:border-card-border dark:text-foreground-secondary dark:hover:bg-background-secondary/50">
+            <Button 
+              variant="outline" 
+              className="dark:border-card-border dark:text-foreground-secondary dark:hover:bg-background-secondary/50"
+              onClick={() => console.log("Exportar clicked")}
+            >
               <Download className="w-4 h-4 mr-2" />
               Exportar
             </Button>
-            <Button className="btn-hero">
+            <Button 
+              className="btn-hero"
+              onClick={() => console.log("Nova Transação clicked")}
+            >
               <Plus className="w-4 h-4 mr-2" />
               Nova Transação
             </Button>
@@ -165,7 +172,7 @@ export default function Financeiro() {
         {/* Charts Row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Revenue vs Expenses Chart */}
-          <Card className="dark:bg-background dark:border-card-border">
+          <Card className="card-gradient dark:bg-background dark:border-card-border">
             <CardHeader>
               <CardTitle className="text-foreground">Receitas vs Despesas</CardTitle>
               <CardDescription className="dark:text-foreground-secondary">Comparativo mensal dos últimos 6 meses</CardDescription>
@@ -196,7 +203,7 @@ export default function Financeiro() {
           </Card>
 
           {/* Expense Distribution */}
-          <Card className="dark:bg-background dark:border-card-border">
+          <Card className="card-gradient dark:bg-background dark:border-card-border">
             <CardHeader>
               <CardTitle className="text-foreground">Distribuição de Despesas</CardTitle>
               <CardDescription className="dark:text-foreground-secondary">Categorias de gastos do mês atual</CardDescription>
@@ -214,6 +221,7 @@ export default function Financeiro() {
                       outerRadius={80}
                       fill="#8884d8"
                       dataKey="value"
+                      labelStyle={{ fill: 'hsl(var(--foreground))', fontSize: '12px', fontWeight: '500' }}
                     >
                       {expenseData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
@@ -237,7 +245,7 @@ export default function Financeiro() {
         </div>
 
         {/* Recent Transactions */}
-        <Card className="dark:bg-background dark:border-card-border">
+        <Card className="card-gradient dark:bg-background dark:border-card-border">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
@@ -245,11 +253,21 @@ export default function Financeiro() {
                 <CardDescription className="dark:text-foreground-secondary">Últimas movimentações financeiras</CardDescription>
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" size="sm" className="dark:border-card-border dark:text-foreground-secondary dark:hover:bg-background-secondary/50">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="dark:border-card-border dark:text-foreground-secondary dark:hover:bg-background-secondary/50"
+                  onClick={() => console.log("Filtrar clicked")}
+                >
                   <Filter className="w-4 h-4 mr-2" />
                   Filtrar
                 </Button>
-                <Button variant="outline" size="sm" className="dark:border-card-border dark:text-foreground-secondary dark:hover:bg-background-secondary/50">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="dark:border-card-border dark:text-foreground-secondary dark:hover:bg-background-secondary/50"
+                  onClick={() => console.log("Período clicked")}
+                >
                   <Calendar className="w-4 h-4 mr-2" />
                   Período
                 </Button>
